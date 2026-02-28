@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Đặc Biệt Cho Em ❤️</title>
+    <style>
+        body {
+            background-color: #ffebee;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        h1 { color: #d32f2f; font-size: 24px; }
+        p { color: #555; font-size: 18px; }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            position: relative;
+            height: 50px;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #btnYes { background-color: #ff4081; color: white; }
+        #btnNo { 
+            background-color: #cfd8dc; 
+            color: #546e7a;
+            position: absolute;
+        }
+
+        .hidden { display: none; }
+        
+        /* Hiệu ứng tim bay */
+        .heart {
+            position: fixed;
+            color: #ff4081;
+            font-size: 20px;
+            animation: move 3s linear infinite;
+        }
+        @keyframes move {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="screen1" class="container">
+        <img src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/644001421_122120836179147755_188584266378979531_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=YOcAFuZn2TIQ7kNvwGMxlkO&_nc_oc=AdlnE2RM_PPJ0tO85QZArKA8OPfRzklqNb30i-YYk1sNEu-uZeiiOHxSI9hky997rVBJFNoiJNDuGg24KKpY4PqP&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=oRSkmCgW6nVRWytqHUf6fw&_nc_ss=8&oh=00_AfvM0pTasIZYwNcTiYoDB5Z9TjR62oKk5xQ9BtfxV0OrwA&oe=69A8F0E5" alt="Cute Cat">
+        <h1>Chào công chúa của anh! ❤️</h1>
+        <p>Anh có một thử thách nhỏ dành cho em nhân ngày Valentine này. Em sẵn sàng chưa?</p>
+        <button id="btnYes" onclick="nextScreen(2)">Sẵn sàng luôn! ✨</button>
+    </div>
+
+    <div id="screen2" class="container hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L4lvBps6CCyBByWf4j/giphy.gif" alt="Love Question">
+        <p id="question">Valentine này em vẫn sẽ yêu anh và đi chơi với anh chứ?</p>
+        <div class="btn-group">
+            <button id="btnYesFinal" onclick="nextScreen(3)" style="position: absolute; left: 20px;">CÓOO! ❤️</button>
+            <button id="btnNo" onmouseover="moveButton()" style="right: 20px;">Không nha 😜</button>
+        </div>
+    </div>
+
+    <div id="screen3" class="container hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Final">
+        <h1>Anh biết mà! Yêu em nhất! ❤️</h1>
+        <p>Chuẩn bị lên đồ nhé, 7h tối nay anh qua đón. Tặng em ngàn nụ hôn! 😘</p>
+    </div>
+
+    <script>
+        function nextScreen(screenNum) {
+            document.getElementById('screen1').classList.add('hidden');
+            document.getElementById('screen2').classList.add('hidden');
+            document.getElementById('screen3').classList.add('hidden');
+            document.getElementById('screen' + screenNum).classList.remove('hidden');
+            
+            if(screenNum === 3) {
+                startHearts();
+            }
+        }
+
+        function moveButton() {
+            const btnNo = document.getElementById('btnNo');
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
