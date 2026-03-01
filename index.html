@@ -3,137 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine Đặc Biệt Cho Em ❤️</title>
+    <title>Hành Trình Yêu - 17.12.2023</title>
     <style>
-        body {
-            background-color: #ffebee;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 90%;
-            position: relative;
-        }
-
-        img {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        h1 { color: #d32f2f; font-size: 24px; }
-        p { color: #555; font-size: 18px; }
-
-        .btn-group {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            position: relative;
-            height: 50px;
-        }
-
-        button {
-            padding: 10px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        #btnYes { background-color: #ff4081; color: white; }
-        #btnNo { 
-            background-color: #cfd8dc; 
-            color: #546e7a;
-            position: absolute;
-        }
-
-        .hidden { display: none; }
-        
-        /* Hiệu ứng tim bay */
-        .heart {
-            position: fixed;
-            color: #ff4081;
-            font-size: 20px;
-            animation: move 3s linear infinite;
-        }
-        @keyframes move {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
+        :root { --pink: #ff4d6d; --light-pink: #ff8fa3; --dark: #590d22; --soft-bg: #fff0f3; }
+        body { background-color: var(--soft-bg); font-family: 'Segoe UI', Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
+        .card { background: white; width: 92%; max-width: 480px; padding: 25px; border-radius: 30px; box-shadow: 0 20px 50px rgba(255, 77, 109, 0.2); text-align: center; position: relative; z-index: 10; }
+        h1 { color: var(--pink); font-size: 22px; margin-bottom: 5px; }
+        .stats { background: var(--soft-bg); padding: 8px; border-radius: 50px; margin: 10px 0; font-weight: bold; color: var(--pink); font-size: 13px; border: 1px dashed var(--pink); }
+        .q-image { width: 100%; max-height: 220px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        #question-text { font-size: 17px; color: #444; font-weight: 600; margin-bottom: 20px; line-height: 1.4; }
+        input[type="text"] { width: 85%; padding: 12px; border: 2px solid #eee; border-radius: 12px; outline: none; font-size: 16px; text-align: center; transition: 0.3s; }
+        .shake { animation: shake 0.5s; border-color: #ff4d6d !important; background: #fff1f1; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        button { background: var(--pink); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-size: 15px; cursor: pointer; margin-top: 15px; font-weight: bold; transition: 0.3s; }
+        button:hover { background: var(--dark); transform: scale(1.03); }
+        .progress-bar { width: 100%; height: 8px; background: #f0f0f0; border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
+        .progress { height: 100%; background: var(--pink); width: 0%; transition: 0.5s; }
+        #final-screen { display: none; }
+        .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
     </style>
 </head>
 <body>
 
-    <div id="screen1" class="container">
-        <img src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/644001421_122120836179147755_188584266378979531_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=YOcAFuZn2TIQ7kNvwGMxlkO&_nc_oc=AdlnE2RM_PPJ0tO85QZArKA8OPfRzklqNb30i-YYk1sNEu-uZeiiOHxSI9hky997rVBJFNoiJNDuGg24KKpY4PqP&_nc_zt=23&_nc_ht=scontent.fhan14-2.fna&_nc_gid=oRSkmCgW6nVRWytqHUf6fw&_nc_ss=8&oh=00_AfvM0pTasIZYwNcTiYoDB5Z9TjR62oKk5xQ9BtfxV0OrwA&oe=69A8F0E5" alt="Cute Cat">
-        <h1>Chào công chúa của anh! ❤️</h1>
-        <p>Anh có một thử thách nhỏ dành cho em nhân ngày Valentine này. Em sẵn sàng chưa?</p>
-        <button id="btnYes" onclick="nextScreen(2)">Sẵn sàng luôn! ✨</button>
-    </div>
+<div class="heart-bg" id="heart-bg"></div>
 
-    <div id="screen2" class="container hidden">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L4lvBps6CCyBByWf4j/giphy.gif" alt="Love Question">
-        <p id="question">Valentine này em vẫn sẽ yêu anh và đi chơi với anh chứ?</p>
-        <div class="btn-group">
-            <button id="btnYesFinal" onclick="nextScreen(3)" style="position: absolute; left: 20px;">CÓOO! ❤️</button>
-            <button id="btnNo" onmouseover="moveButton()" style="right: 20px;">Không nha 😜</button>
+<div class="card">
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    
+    <div id="game-screen">
+        <h1 id="title">💖 LOVE CHALLENGE 💖</h1>
+        <h1 id="title">Thử Thách Cho Bé Iu Như Ýy🍌</h1>
+        <div class="stats" id="stats">Tính toán ngày yêu...</div>
+        
+        <div class="question-box">
+            <img id="q-image" class="q-image" src="" alt="Kỷ niệm của chúng mình">
+            <p id="question-text"></p>
+            <div id="input-area">
+                <input type="text" id="answer-input" placeholder="Viết câu trả lời..." autocomplete="off">
+            </div>
+            <div id="choice-area" style="display: none;"></div>
+            <p id="error-msg" style="color: #ff4d6d; font-size: 13px; margin-top: 10px; display: none; font-weight: bold;">Sai rồi bé iu ơi! Nhớ lại xem nào... ❌</p>
         </div>
+        
+        <button onclick="handleNext()" id="next-btn">Tiếp theo ➔</button>
     </div>
 
-    <div id="screen3" class="container hidden">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZ3ZhcHoxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Final">
-        <h1>Anh biết mà! Yêu em nhất! ❤️</h1>
-        <p>Chuẩn bị lên đồ nhé, 7h tối nay anh qua đón. Tặng em ngàn nụ hôn! 😘</p>
+    <div id="final-screen">
+        <div style="font-size: 60px;">🎁</div>
+        <h1 style="color: var(--pink);">HOÀN THÀNH XUẤT SẮC!</h1>
+        <p style="color: #555; line-height: 1.6;">
+            Cảm ơn em đã vượt qua tất cả thử thách!<br>
+            Hành trình từ <b>17/12/2023</b> sẽ còn kéo dài mãi mãi.<br>
+            <b>Anh yêu em nhìu lắm! ❤️</b>
+        </p>
+        <button onclick="location.reload()">Chơi lại ❤️</button>
     </div>
+</div>
 
-    <script>
-        function nextScreen(screenNum) {
-            document.getElementById('screen1').classList.add('hidden');
-            document.getElementById('screen2').classList.add('hidden');
-            document.getElementById('screen3').classList.add('hidden');
-            document.getElementById('screen' + screenNum).classList.remove('hidden');
-            
-            if(screenNum === 3) {
-                startHearts();
+<script>
+    const startDate = new Date("2023-12-17");
+    const diffDays = Math.floor((new Date() - startDate) / (1000 * 60 * 60 * 24));
+    document.getElementById('stats').innerText = `Đã bên nhau ${diffDays} ngày hạnh phúc`;
+
+    // --- DANH SÁCH ĐẦY ĐỦ CÂU HỎI CỦA BẠN ---
+    const challenges = [
+        { 
+            q: "Mật mã truy cập: Ngày mình bắt đầu yêu? (Viết liền 8 số: DDMMYYYY)", 
+            a: "17122023", 
+            type: "input",
+            img: "https://i.postimg.cc/GmBVJyKJ/ee7de554-8788-43e7-b441-62975673c461.jpg" 
+        },
+        { 
+            q: "Trong 3 từ này, anh hay dùng từ nào để nịnh em nhất?", 
+            a: "a", 
+            type: "choice", 
+            choices: ["A. Bé iu", "B. Công chúa", "C. Vợ ơi"],
+            img: "https://i.postimg.cc/rwWgwCQL/7f1d6a60-6e89-4df0-9100-6b0c0b2cf46b.jpg" 
+        },
+        { 
+            q: "Địa điểm nào là nơi mình có nụ hôn đầu tiên?", 
+            a: "nhà em", // Để 'any' nếu bạn muốn cô ấy nhập gì cũng được qua, hoặc thay bằng đáp án đúng
+            type: "input",
+            img: "https://i.postimg.cc/VNWRjfxW/9c34fa98-2028-4eac-813d-6a8e1b7e4f16.jpg"
+        },
+        { 
+            q: "Em thấy anh có đẹp trai không? (Trả lời thật lòng nha!)", 
+            a: "có", 
+            type: "input",
+            img: "https://i.postimg.cc/BnGHMWc7/da46d437-8365-4432-b494-4e6e97a9faf9.jpg"
+        },
+        { 
+            q: "Em đừng bỏ rơi anh nhé được không? Anh yêu em nhìu lắm!", 
+            a: "dạ", // Đáp án yêu cầu
+            type: "input",
+            img: "https://i.postimg.cc/1R2dHKCC/e5c01a60-6d78-436f-9185-245f4aa21b1d.jpg"
+        },
+        { 
+            q: "Valentine em thích gì anh tặng cho nè bé iu?", 
+            a: "tiền", 
+            type: "input",
+            img: "https://i.postimg.cc/xTL6PVbG/623d8595-07fc-4ae6-8c4c-35373118ff64.jpg"
+        },
+        { 
+            q: "Hứa với anh sẽ bên nhau thêm ít nhất 100 năm nữa nhé?", 
+            a: "dạ", 
+            type: "input",
+            img: "https://i.postimg.cc/BZKpqfpB/f9a911d2-950f-4ef8-949c-a338f7f64e4d.jpg"
+        }
+    ];
+
+    let currentStep = 0;
+
+    function loadChallenge() {
+        const item = challenges[currentStep];
+        document.getElementById('question-text').innerText = item.q;
+        document.getElementById('q-image').src = item.img;
+        
+        const progress = (currentStep / challenges.length) * 100;
+        document.getElementById('progress').style.width = progress + "%";
+        document.getElementById('error-msg').style.display = "none";
+
+        if (item.type === "choice") {
+            document.getElementById('input-area').style.display = "none";
+            document.getElementById('choice-area').style.display = "block";
+            document.getElementById('choice-area').innerHTML = item.choices.map(c => 
+                `<button onclick="validate('${c.charAt(0).toLowerCase()}')" style="margin: 5px; background: var(--light-pink);">${c}</button>`
+            ).join("");
+            document.getElementById('next-btn').style.display = "none";
+        } else {
+            document.getElementById('input-area').style.display = "block";
+            document.getElementById('choice-area').style.display = "none";
+            document.getElementById('next-btn').style.display = "inline-block";
+            document.getElementById('answer-input').value = "";
+        }
+    }
+
+    function handleNext() {
+        validate(document.getElementById('answer-input').value);
+    }
+
+    function validate(val) {
+        const item = challenges[currentStep];
+        const userAns = val.trim().toLowerCase();
+        const correctAns = item.a.toLowerCase();
+
+        if (userAns === correctAns || correctAns === "any") {
+            currentStep++;
+            if (currentStep < challenges.length) {
+                loadChallenge();
+            } else {
+                showFinal();
             }
+        } else {
+            const inputEl = document.getElementById('answer-input');
+            inputEl.classList.add('shake');
+            document.getElementById('error-msg').style.display = "block";
+            setTimeout(() => inputEl.classList.remove('shake'), 500);
         }
+    }
 
-        function moveButton() {
-            const btnNo = document.getElementById('btnNo');
-            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
-            
-            btnNo.style.position = 'fixed';
-            btnNo.style.left = x + 'px';
-            btnNo.style.top = y + 'px';
-        }
+    function showFinal() {
+        document.getElementById('game-screen').style.display = "none";
+        document.getElementById('final-screen').style.display = "block";
+        document.getElementById('progress').style.width = "100%";
+        createHearts();
+    }
 
-        function startHearts() {
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 4000);
-            }, 300);
+    function createHearts() {
+        const bg = document.getElementById('heart-bg');
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement('div');
+            heart.innerHTML = "❤️";
+            heart.style.position = "absolute";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = "100vh";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px";
+            heart.style.transition = `transform ${Math.random() * 3 + 2}s linear`;
+            bg.appendChild(heart);
+            setTimeout(() => heart.style.transform = `translateY(-110vh) rotate(360deg)`, 100);
         }
-    </script>
+    }
+
+    loadChallenge();
+</script>
 </body>
-
 </html>
-
